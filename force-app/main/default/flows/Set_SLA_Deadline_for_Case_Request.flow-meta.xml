@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>63.0</apiVersion>
+    <assignments>
+        <name>Set_SLA_for_Premium</name>
+        <label>Nível de Serviço Premium</label>
+        <locationX>50</locationX>
+        <locationY>647</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.SLA_Deadline__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>SLA_Deadline_Premium</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_SLA_Deadline_Premium</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Set_SLA_for_Standard</name>
+        <label>Nível de Serviço Standard</label>
+        <locationX>314</locationX>
+        <locationY>647</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.SLA_Deadline__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>SLA_Deadline_Standard</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_SLA_Deadline_Standard</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <name>Check_Recod_Type</name>
+        <label>Checa o tipo de Record</label>
+        <locationX>314</locationX>
+        <locationY>539</locationY>
+        <defaultConnectorLabel>Outro</defaultConnectorLabel>
+        <rules>
+            <name>Premium</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.RecordTypeId</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>Get_Record_Type_Info_premium.Id</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_SLA_for_Premium</targetReference>
+            </connector>
+            <label>Premium</label>
+        </rules>
+        <rules>
+            <name>Standard</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.RecordTypeId</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>Get_Record_Type_Info_standard.Id</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Set_SLA_for_Standard</targetReference>
+            </connector>
+            <label>Standard</label>
+        </rules>
+    </decisions>
+    <description>Adição de uma action para calcular com o horário comercial</description>
+    <environments>Default</environments>
+    <formulas>
+        <description>Faz o Calculo para ter um horário de 8 horas a frente</description>
+        <name>SLA_Deadline_Premium</name>
+        <dataType>DateTime</dataType>
+        <expression>Now() + (8/24)</expression>
+    </formulas>
+    <formulas>
+        <description>Faz o Calculo para ter um horário de 24 horas a frente.</description>
+        <name>SLA_Deadline_Standard</name>
+        <dataType>DateTime</dataType>
+        <expression>now() + 1</expression>
+    </formulas>
+    <interviewLabel>Set SLA Deadline for Case Request {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Set SLA Deadline for Case Request</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <description>Vai receber o RecordType selecionado (Premium ou standard) e fazer uma comparação, se for igual a premium será premium</description>
+        <name>Get_Record_Type_Info_premium</name>
+        <label>Get Perfil Premium</label>
+        <locationX>314</locationX>
+        <locationY>431</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Check_Recod_Type</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>SobjectType</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Case_Request__c</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Premium</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>RecordType</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>Vai receber o RecordType selecionado (Premium ou standard) e fazer uma comparação, se não for igual a premium será standard</description>
+        <name>Get_Record_Type_Info_standard</name>
+        <label>Get Perfil Standard</label>
+        <locationX>314</locationX>
+        <locationY>323</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_Record_Type_Info_premium</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>SobjectType</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Case_Request__c</stringValue>
+            </value>
+        </filters>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Standard</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>RecordType</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <name>Update_SLA_Deadline_Premium</name>
+        <label>Update SLA Deadline - Premium</label>
+        <locationX>50</locationX>
+        <locationY>755</locationY>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_SLA_Deadline_Standard</name>
+        <label>Update SLA Deadline - Standard</label>
+        <locationX>314</locationX>
+        <locationY>755</locationY>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>188</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Record_Type_Info_standard</targetReference>
+        </connector>
+        <object>Case_Request__c</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Obsolete</status>
+</Flow>
