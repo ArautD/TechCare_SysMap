@@ -49,10 +49,10 @@ sfdx force:source:deploy -p force-app -u Caso_pratico_playground
 
 
 ## ✅ Testes Recomendados
-1. CaseRequestControllerTest, para fazer a atualização de status quando o botão é clicado, transformando o campo status de ‘Closed’ para ‘In Progress’. 
-3. CaseRequestHandlerTest, para fazer a verificação se o SLA Deadline foi cumprido.
-4. CaseRequestTriggerTest para verificar se o método CaseRequestHandler está sendo chamado.
-5. CaseRequestRestAPITest para fazer uma requisição, utilizando um GET para ter como resultado um JSON com Status e o SLA.
+1. CaseRequestControllerTest, para fazer a verificação se o caso está sendo salvo sem Resolution Note
+2. CaseRequestHandlerTest, para fazer a verificação se o botão está funcionando para reabrir o caso transformando status 'Closed' para 'In Progress' e se o SLA Deadline foi cumprido.
+3. CaseRequestTrigger para verificar se o método CaseRequestHandler está sendo chamado.
+4. CaseRequestRestAPITest para fazer uma requisição, utilizando um GET para ter como resultado um JSON com Status e o SLA.
 
 ### Exemplo dos testes
    ![image](https://github.com/user-attachments/assets/3519a3a5-3c83-4bd8-9961-515cb86d524b)
