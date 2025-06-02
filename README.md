@@ -60,12 +60,16 @@ sfdx force:source:deploy -p force-app -u Caso_pratico_playground
 
 ## 📁 Estrutura
 
-📦 force-app
- ┣ 📂 objects
- ┣ 📂 triggers
- ┣ 📂 classes
- ┣ 📂 lwc
- ┣ README.md
+📦 TechCare
+ ┣ 📂 Force-app/main/default
+    ┣ 📂 classes
+    ┣ 📂 triggers
+    ┣ 📂 lwc
+    ┣ 📂 aura
+    ┣ 📂 objects
+    ┣ 📂 layout
+    ┣ 📂 permissionsets
+    ┣ README.md
 
 
 > Desenvolvido por [Paulo Sergio Lemos (ArautD)] – 2025
