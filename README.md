@@ -3,8 +3,6 @@
 
 ## 📌 Objetivo
 Esta aplicação tem como objetivo gerenciar solicitações de suporte técnico, com dois tipos de perfis (Support Premium e Support Standard), conta com controle de Casos e relatórios em uma instância Salesforce personalizada. Utilizando recursos declarativos (Admin) e programáticos (Dev) com foco em boas práticas de configuração e desenvolvimento.
-## Diagrama de Caso de Uso
-![image](https://github.com/user-attachments/assets/b444b8eb-7d1d-46b6-922b-2fdba2b66e6d)
 
 ## 🚀 Instalação & Deploy
 ### 🔧 Pré-requisitos
@@ -21,6 +19,8 @@ git clone https://github.com/ArautD/TechCare_SysMap.git
 bash
 sfdx force:source:deploy -p force-app -u Caso_pratico_playground
 
+## Diagrama de Caso de Uso
+![image](https://github.com/user-attachments/assets/b444b8eb-7d1d-46b6-922b-2fdba2b66e6d)
 
 ## 🔧 Configurações Declarativas
 - Objeto: Case_Request__c com campos como: Case Request Name, ClosedDate, Created By, Description, Last Modified By, Owner, Priority, Record Type, Resolution Notes, Resolution Time, SLA Deadline, SLA Met, Status e Subject.
@@ -56,21 +56,6 @@ sfdx force:source:deploy -p force-app -u Caso_pratico_playground
 
 ### Exemplo dos testes
    ![image](https://github.com/user-attachments/assets/3519a3a5-3c83-4bd8-9961-515cb86d524b)
-
-
-## 📁 Estrutura
-
-📦 TechCare
- ┣ 📂 Force-app/main/default
-    ┣ 📂 classes
-    ┣ 📂 triggers
-    ┣ 📂 lwc
-    ┣ 📂 aura
-    ┣ 📂 objects
-    ┣ 📂 layout
-    ┣ 📂 permissionsets
-    ┣ README.md
-
 
 > Desenvolvido por Paulo Sergio Lemos (ArautD) – 2025
 
