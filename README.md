@@ -18,7 +18,7 @@ git clone https://github.com/ArautD/TechCare_SysMap.git
 
 ### 📤 Deploy via CLI
 bash
-sfdx force:source:deploy -p force-app -u nome-da-sua-org
+sfdx force:source:deploy -p force-app -u Caso_pratico_playground
 
 
 ## 🔧 Configurações Declarativas
