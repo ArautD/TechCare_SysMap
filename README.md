@@ -1,5 +1,5 @@
 # 🛠️ Projeto Salesforce: TechCare Support 
-## Trata-se de uma atividade de caso prático da 6ª Edição do Programa Trainee Sysmap de Excelência SalesForce.
+## Trata-se de uma atividade de caso prático da 6ª Edição do Programa Trainee Sysmap de Excelência Salesforce.
 
 ## 📌 Objetivo
 Esta aplicação tem como objetivo gerenciar solicitações de suporte técnico, com dois tipos de perfis (Support Premium e Support Standard), conta com controle de Casos e relatórios em uma instância Salesforce personalizada. Utilizando recursos declarativos (Admin) e programáticos (Dev) com foco em boas práticas de configuração e desenvolvimento.
