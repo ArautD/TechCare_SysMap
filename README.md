@@ -72,6 +72,6 @@ sfdx force:source:deploy -p force-app -u Caso_pratico_playground
     ┣ README.md
 
 
-> Desenvolvido por [Paulo Sergio Lemos (ArautD)] – 2025
+> Desenvolvido por Paulo Sergio Lemos (ArautD) – 2025
 
 >"Não acredite em você mesmo, acredite em mim, que acredita em você." _Kamina
