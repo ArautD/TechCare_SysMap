@@ -13,7 +13,7 @@ Esta aplicação tem como objetivo gerenciar solicitações de suporte técnico,
 
 ### 📥 Clonagem do Projeto
 bash
-git clone https://github.com/seu-repositorio/salesforce-techcare.git
+git clone https://github.com/ArautD/TechCare_SysMap.git
 
 
 ### 📤 Deploy via CLI
