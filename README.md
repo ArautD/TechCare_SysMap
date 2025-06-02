@@ -1,13 +1,15 @@
-# 🛠️ Projeto Salesforce: TechCare Support
+# 🛠️ Projeto Salesforce: TechCare Support, trata-se de uma atividade de caso prático da 6ª Edição do Programa Trainee Sysmap de Excelência SalesForce.
 
 ## 📌 Objetivo
-Esta aplicação tem como objetivo gerenciar solicitações de suporte técnico, com controle de SLA, priorização e relatórios em uma instância Salesforce personalizada. Utiliza recursos declarativos (Admin) e programáticos (Dev) com foco em boas práticas de configuração e desenvolvimento.
+Esta aplicação tem como objetivo gerenciar solicitações de suporte técnico, com dois tipos de perfis (Support Premium e Support Standard), conta com controle de Casos e relatórios em uma instância Salesforce personalizada. Utilizando recursos declarativos (Admin) e programáticos (Dev) com foco em boas práticas de configuração e desenvolvimento.
+## Diagrama de Caso de Uso
+![image](https://github.com/user-attachments/assets/b444b8eb-7d1d-46b6-922b-2fdba2b66e6d)
 
 ## 🚀 Instalação & Deploy
 ### 🔧 Pré-requisitos
 - Conta Salesforce Developer Edition
-- VS Code com Salesforce Extension Pack
-- Salesforce CLI (opcional para deploy automático)
+- VSCode com Salesforce Extension Pack
+- Salesforce CLI (opcional para deploy automático) disponível em: <https://developer.salesforce.com/tools/salesforcecli>
 
 ### 📥 Clonagem do Projeto
 bash
@@ -16,39 +18,40 @@ git clone https://github.com/seu-repositorio/salesforce-techcare.git
 
 ### 📤 Deploy via CLI
 bash
-sfdx force:source:deploy -p force-app -u nome-da-org
+sfdx force:source:deploy -p force-app -u nome-da-sua-org
 
 
 ## 🔧 Configurações Declarativas
-- Objeto: Case_Request__c com campos como Subject, Description, Priority, SLA, Resolution Notes
+- Objeto: Case_Request__c com campos como: Case Request Name, ClosedDate, Created By, Description, Last Modified By, Owner, Priority, Record Type, Resolution Notes, Resolution Time, SLA Deadline, SLA Met, Status e Subject.
+- Objeto Case_History__c com campos como: Case History Name, Case Request Link, Created By, Last Modified By, Owner, SLA Met, Time Closed.
 - Record Types: Premium e Standard
 - Permission Sets: Support Premium, Support Standard
-- Flow: SLA automático (8h ou 24h)
-- Validações: Bloqueia fechamento sem resolução
+- Flow: SLA automático (8h para Premium ou 24h para Standard) e ClosedDate (Define a data de fechamento do Caso)
+- Validações: Bloqueia fechamento sem resolução do caso
 - Atribuição via Flow automático
-- Dynamic Forms condicionais
-- App Lightning com abas úteis
+- Dynamic Forms condicionais entre perfil Premium e Standard
+- App Lightning com abas úteis como Case Requests, Dashboards e Reports
 
 ## 📊 Relatórios & Dashboards
 - Relatórios: Casos por status/prioridade
 - Dashboards: SLA médio e total por status
 
 ## 👨‍💻 Desenvolvimento (Dev)
-- Trigger para checar SLA e gravar em Case_History__c
-- Classe de teste com 90%+ cobertura
-- LWC para countdown e botão "Reabrir Caso"
-- API REST (opcional) com status do caso
+- Classe Apex CaseRequestHandler para checar SLA e gravar em Case_History__c
+- Classe CaseRequestController para editar o campo Status__c de 'Closed' para 'In Progress' quando pressionado o botão 'Reabrir Caso'
+- LWC para criar o componente caseDetail com countdown e botão "Reabrir Caso" e CaseRequestTrigger para fazer a chamada
+- Classe de teste para CaseRequestController, CaseRequestHanddler, CaseRequestRestAPI e CaseRequestTrigger com 90%+ cobertura
+- API REST Classe CaseRequestRestAPI com status do caso, se SLA foi cumprido (SLAMet), Status e o caseID do caso.
+
+### EXEMPLO
+![image](https://github.com/user-attachments/assets/729c1603-0416-42f3-96e0-91de3aea332f)
+
 
 ## ✅ Testes Recomendados
 1. Criar casos e testar SLA
 2. Validar fluxo e bloqueios
 3. Fechar casos e revisar histórico
 4. Usar LWC para reabrir
-
-## 📹 Vídeos
-- Configuração: https://loom.com/...
-- Flows e validações: https://loom.com/...
-- Desenvolvimento: https://loom.com/...
 
 ## 📁 Estrutura
 
@@ -60,4 +63,6 @@ sfdx force:source:deploy -p force-app -u nome-da-org
  ┣ README.md
 
 
-> Desenvolvido por [Seu Nome] – 2025
+> Desenvolvido por [Paulo Sergio Lemos (ArautD)] – 2025
+
+>"Não acredite em você mesmo, acredite em mim, que acredita em você." _Kamina
