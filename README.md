@@ -49,10 +49,14 @@ sfdx force:source:deploy -p force-app -u Caso_pratico_playground
 
 
 ## ✅ Testes Recomendados
-1. Criar casos e testar SLA
-2. Validar fluxo e bloqueios
-3. Fechar casos e revisar histórico
-4. Usar LWC para reabrir
+1. CaseRequestControllerTest, para fazer a atualização de status quando o botão é clicado, transformando o campo status de ‘Closed’ para ‘In Progress’. 
+3. CaseRequestHandlerTest, para fazer a verificação se o SLA Deadline foi cumprido.
+4. CaseRequestTriggerTest para verificar se o método CaseRequestHandler está sendo chamado.
+5. CaseRequestRestAPITest para fazer uma requisição, utilizando um GET para ter como resultado um JSON com Status e o SLA.
+
+### Exemplo dos testes
+   ![image](https://github.com/user-attachments/assets/3519a3a5-3c83-4bd8-9961-515cb86d524b)
+
 
 ## 📁 Estrutura
 
